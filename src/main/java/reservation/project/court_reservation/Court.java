@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "courts")
 public class Court {
 
     @Id
@@ -26,4 +27,8 @@ public class Court {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "court")
     private List<Reservation> reservations;
 
+    public Court(LocalDate openHour, LocalDate closeHour) {
+        this.openHour = openHour;
+        this.closeHour = closeHour;
+    }
 }

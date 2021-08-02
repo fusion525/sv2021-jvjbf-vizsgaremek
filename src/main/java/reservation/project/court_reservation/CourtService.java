@@ -2,7 +2,11 @@ package reservation.project.court_reservation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 @Service
 public class CourtService {
@@ -17,7 +21,23 @@ public class CourtService {
         this.courtRepository = courtRepository;
     }
 
-    public Court getCourtById(long id) {
-        return courtRepository.getById(id);
+    public CourtDTO getCourtById(long id) {
+        return modelMapper.map(courtRepository.getById(id), CourtDTO.class);
+    }
+
+    public List<CourtDTO> listAllCourts() {
+        Type targetListType = new TypeToken<List<CourtDTO>>(){}.getType();
+        return modelMapper.map(courtRepository.findAll(), targetListType);
+    }
+
+    public CourtDTO createCourt(CreateCourtCommand command) {
+        Court court = new Court(command.getOpenHour(), command.getCloseHour());
+        courtRepository.save(court);
+
+        return modelMapper.map(court, CourtDTO.class);
+    }
+
+    public void deleteCourtById(long id) {
+        courtRepository.deleteById(id);
     }
 }

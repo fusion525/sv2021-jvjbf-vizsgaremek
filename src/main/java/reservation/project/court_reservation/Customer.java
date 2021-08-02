@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "customers")
 public class Customer {
 
     @Id
@@ -28,4 +29,9 @@ public class Customer {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customer")
     private List<Reservation> reservations;
 
+    public Customer(String name, String email, String phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
 }

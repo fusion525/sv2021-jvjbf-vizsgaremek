@@ -14,13 +14,13 @@ public class ReservationService {
     private ModelMapper modelMapper;
     private ReservationRepository reservationRepository;
     private CustomerService customerService;
-    private CourtService courtService;
+    private CourtRepository courtRepository;
 
-    public ReservationService(ModelMapper modelMapper, ReservationRepository reservationRepository, CustomerService customerService, CourtService courtService) {
+    public ReservationService(ModelMapper modelMapper, ReservationRepository reservationRepository, CustomerService customerService, CourtRepository courtRepository) {
         this.modelMapper = modelMapper;
         this.reservationRepository = reservationRepository;
         this.customerService = customerService;
-        this.courtService = courtService;
+        this.courtRepository = courtRepository;
     }
 
     public ReservationDTO getReservationById(long id) {
@@ -51,7 +51,7 @@ public class ReservationService {
     }
 
     public ReservationDTO makeReservation(MakeReservationCommand command) {
-        Court court = courtService.getCourtById(command.getCourtId());
+        Court court = courtRepository.getById(command.getCourtId());
         Customer customer = customerService.getCustomerById(command.getCustomerId());
         LocalDateTime time = command.getTime();
 
@@ -64,7 +64,7 @@ public class ReservationService {
     public ReservationDTO modifyReservation(ModifyReservationCommand command) {
         Reservation reservation = reservationRepository.getById(command.getReservationId());
         Customer customer = customerService.getCustomerById(command.getCustomerId());
-        Court court = courtService.getCourtById(command.getCourtId());
+        Court court = courtRepository.getById(command.getCourtId());
 
         reservation.setCourt(court);
         reservation.setCustomer(customer);
