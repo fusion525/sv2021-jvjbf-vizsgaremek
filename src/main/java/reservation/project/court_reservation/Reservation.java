@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "reservations")
 public class Reservation {
 
     @Id
@@ -23,12 +24,16 @@ public class Reservation {
     private LocalDateTime time;
 
     @ManyToOne
-    @JoinColumn(name = "res_id")
+    @JoinColumn(name = "court_id")
     private Court court;
 
     @ManyToOne
     @JoinColumn(name = "cust_id")
     private Customer customer;
 
-
+    public Reservation(LocalDateTime time, Court court, Customer customer) {
+        this.time = time;
+        this.court = court;
+        this.customer = customer;
+    }
 }
