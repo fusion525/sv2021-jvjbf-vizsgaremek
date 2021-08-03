@@ -27,7 +27,7 @@ public class Customer {
     private String phoneNumber;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customer")
-    private List<Reservation> reservations;
+    private List<Reservation> reservation;
 
     public Customer(String name, String email, String phoneNumber) {
         this.name = name;

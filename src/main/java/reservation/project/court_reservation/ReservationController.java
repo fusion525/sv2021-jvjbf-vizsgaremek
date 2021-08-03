@@ -2,6 +2,7 @@ package reservation.project.court_reservation;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,15 +20,15 @@ public class ReservationController {
         return reservationService.getReservationById(id);
     }
 
-    @GetMapping("/court")
-    public List<ReservationDTO> getReservationsByCourtId(@RequestBody GetReservationCommand command) {
-        return reservationService.getReservationByCourtId(command);
+    @GetMapping("/court/{id}")
+    public List<ReservationDTO> getReservationsByCourtId(@PathVariable("id") long id) {
+        return reservationService.getReservationByCourtId(id);
     }
 
-    @GetMapping("/time")
-    public List<ReservationDTO> getReservationByTimeByCourt(@RequestBody GetReservationCommand command){
-        return reservationService.getReservationByTimeByCourt(command);
-    }
+    //@GetMapping("/time")
+    //public List<ReservationDTO> getReservationByTimeByCourt(@RequestBody GetReservationCommand command){
+    //    return reservationService.getReservationByTimeByCourt(command);
+    //}
 
     @GetMapping
     public List<ReservationDTO> getActualReservations() {
@@ -35,12 +36,12 @@ public class ReservationController {
     }
 
     @PostMapping
-    public ReservationDTO makeReservation(@RequestBody MakeReservationCommand command) {
+    public ReservationDTO makeReservation(@RequestBody @Valid MakeReservationCommand command) {
         return reservationService.makeReservation(command);
     }
 
     @PutMapping
-    public ReservationDTO modifyReservation(@RequestBody ModifyReservationCommand command){
+    public ReservationDTO modifyReservation(@RequestBody @Valid ModifyReservationCommand command){
         return  reservationService.modifyReservation(command);
     }
 

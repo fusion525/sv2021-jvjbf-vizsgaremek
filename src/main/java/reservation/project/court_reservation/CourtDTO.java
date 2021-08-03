@@ -1,10 +1,11 @@
 package reservation.project.court_reservation;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -13,8 +14,10 @@ import java.util.List;
 public class CourtDTO {
 
     private Long courtId;
-    private LocalDate openHour;
-    private LocalDate closeHour;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime openHour;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime closeHour;
     private List<Reservation> reservations;
 
 }

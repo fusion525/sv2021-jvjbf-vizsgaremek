@@ -1,10 +1,11 @@
 package reservation.project.court_reservation;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Data
@@ -12,7 +13,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CreateCourtCommand {
 
-    private LocalDate openHour;
-    private LocalDate closeHour;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime openHour;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime closeHour;
 
 }

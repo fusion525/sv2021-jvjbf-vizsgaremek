@@ -25,7 +25,7 @@ public class CourtController {
     }
 
     @PostMapping
-    public CourtDTO createCourt(CreateCourtCommand command) {
+    public CourtDTO createCourt(@RequestBody CreateCourtCommand command) {
         return courtService.createCourt(command);
     }
 

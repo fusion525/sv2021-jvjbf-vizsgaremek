@@ -1,11 +1,12 @@
 package reservation.project.court_reservation;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -20,14 +21,16 @@ public class Court {
     @Column(name = "court_id")
     private Long courtId;
     @Column(name = "court_open")
-    private LocalDate openHour;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime openHour;
     @Column(name = "court_close")
-    private LocalDate closeHour;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime closeHour;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "court")
     private List<Reservation> reservations;
 
-    public Court(LocalDate openHour, LocalDate closeHour) {
+    public Court(LocalTime openHour, LocalTime closeHour) {
         this.openHour = openHour;
         this.closeHour = closeHour;
     }

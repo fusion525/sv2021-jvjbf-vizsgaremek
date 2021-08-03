@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MakeReservationCommand {
 
+    @TimeConstraint
     private LocalDateTime time;
     private long courtId;
     private long customerId;

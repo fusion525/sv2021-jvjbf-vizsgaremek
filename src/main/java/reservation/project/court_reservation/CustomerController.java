@@ -2,6 +2,7 @@ package reservation.project.court_reservation;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,12 +21,12 @@ public class CustomerController {
     }
 
     @PostMapping
-    public CustomerDTO createCustomer(@RequestBody CreateCustomerCommand command) {
+    public CustomerDTO createCustomer(@RequestBody @Valid CreateCustomerCommand command) {
         return customerService.createCustomer(command);
     }
 
     @PutMapping
-    public CustomerDTO modifyCustomer(@RequestBody ModifyCustomerCommand command) {
+    public CustomerDTO modifyCustomer(@RequestBody @Valid ModifyCustomerCommand command) {
         return customerService.modifyCustomer(command);
     }
 

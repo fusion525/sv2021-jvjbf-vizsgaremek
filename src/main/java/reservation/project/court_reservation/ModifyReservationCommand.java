@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class ModifyReservationCommand {
 
     private long reservationId;
+    @TimeConstraint
     private LocalDateTime time;
     private long customerId;
     private long courtId;

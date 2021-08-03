@@ -1,0 +1,42 @@
+POST http://localhost:8080/api/reservations
+Content-Type: application/json
+
+{
+"time": "2021-08-04T21:30",
+  "courtId": 2,
+  "customerId": 2
+}
+
+###
+POST http://localhost:8080/api/courts
+Content-Type: application/json
+
+{
+  "openHour": "08:00:00",
+  "closeHour": "23:00:00"
+}
+
+###
+
+POST http://localhost:8080/api/courts
+Content-Type: application/json
+
+{
+  "openHour": "10:00:00",
+  "closeHour": "23:59:00"
+}
+
+###
+POST http://localhost:8080/api/customers
+Content-Type: application/json
+
+{
+"name": "Gipsz Jakab",
+  "email": "jakab.gipsz@outlook.com",
+  "phoneNumber": "06207555324"
+}
+
+###
+
+
+

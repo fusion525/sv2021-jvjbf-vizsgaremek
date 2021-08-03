@@ -27,19 +27,19 @@ public class ReservationService {
         return modelMapper.map(reservationRepository.getById(id), ReservationDTO.class);
     }
 
-    public List<ReservationDTO> getReservationByCourtId(GetReservationCommand command) {
+    public List<ReservationDTO> getReservationByCourtId(long id) {
         Type targetListType = new TypeToken<List<ReservationDTO>>(){}.getType();
 
-        return modelMapper.map(reservationRepository.findByCourtId(command.getCourtId()),targetListType);
+        return modelMapper.map(reservationRepository.findByCourtId(id),targetListType);
 
     }
 
-    public List<ReservationDTO> getReservationByTimeByCourt(GetReservationCommand command) {
-        Type targetListType = new TypeToken<List<ReservationDTO>>(){}.getType();
-
-        return modelMapper.map(reservationRepository.findReservationByTimeByCourt(command.getCourtId(),
-                command.getStart(),command.getEnd()),targetListType);
-    }
+    //public List<ReservationDTO> getReservationByTimeByCourt(GetReservationCommand command) {
+    //    Type targetListType = new TypeToken<List<ReservationDTO>>(){}.getType();
+    //
+    //    return modelMapper.map(reservationRepository.findReservationByTimeByCourt(command.getCourtId(),
+    //            command.getStart(),command.getEnd()),targetListType);
+    //}
 
     public List<ReservationDTO> getActualReservations() {
         Type targetListType = new TypeToken<List<ReservationDTO>>(){}.getType();
@@ -55,7 +55,7 @@ public class ReservationService {
         Customer customer = customerService.getCustomerById(command.getCustomerId());
         LocalDateTime time = command.getTime();
 
-        Reservation reservation = new Reservation(time,court, customer);
+        Reservation reservation = new Reservation(time,court,customer);
         reservationRepository.save(reservation);
 
         return modelMapper.map(reservation, ReservationDTO.class);
