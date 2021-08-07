@@ -46,12 +46,12 @@ public class CourtController {
         return courtService.createCourt(command);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Deletes court by id")
     @ApiResponse(responseCode = "204", description = "court deleted successfully")
-    public void deleteCourtById(@PathVariable(name = "id") long id) {
-        courtService.deleteCourtById(id);
+    public void deleteCourtById(@RequestBody DeleteCourtCommand command) {
+        courtService.deleteCourtById(command);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

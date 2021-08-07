@@ -91,8 +91,8 @@ public class ReservationService {
         return modelMapper.map(reservation, ReservationDTO.class);
     }
 
-    public void deleteReservation(long id) {
-        Reservation reservation = reservationRepository.getById(id);
+    public void deleteReservation(DeleteReservationCommand command) {
+        Reservation reservation = reservationRepository.getById(command.getId());
 
         reservationRepository.delete(reservation);
     }

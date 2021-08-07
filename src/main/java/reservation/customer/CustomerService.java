@@ -59,7 +59,7 @@ public class CustomerService {
         return modelMapper.map(customer, CustomerDTO.class);
     }
 
-    public void deleteCustomer(long id) {
-        customerRepository.deleteById(id);
+    public void deleteCustomer(DeleteCustomerCommand command) {
+        customerRepository.deleteById(command.getId());
     }
 }

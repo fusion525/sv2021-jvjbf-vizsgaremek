@@ -49,12 +49,12 @@ public class CustomerController {
         return customerService.modifyCustomer(command);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(description = "Deletes customer by id")
     @ApiResponse(responseCode = "204", description = "Customer deleted")
-    public void deleteCustomer(@PathVariable("id") long id) {
-        customerService.deleteCustomer(id);
+    public void deleteCustomer(@RequestBody DeleteCustomerCommand command) {
+        customerService.deleteCustomer(command);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

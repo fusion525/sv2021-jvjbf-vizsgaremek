@@ -37,7 +37,7 @@ public class CourtService {
         return modelMapper.map(court, CourtDTO.class);
     }
 
-    public void deleteCourtById(long id) {
-        courtRepository.deleteById(id);
+    public void deleteCourtById(DeleteCourtCommand command) {
+        courtRepository.deleteById(command.getId());
     }
 }

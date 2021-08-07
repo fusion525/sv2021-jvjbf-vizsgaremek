@@ -66,12 +66,12 @@ public class ReservationController {
         return  reservationService.modifyReservation(command);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(description = "Deletes reservation by id")
     @ApiResponse(responseCode = "204", description = "Reservation deleted")
-    public void deleteReservation(@PathVariable long id) {
-        reservationService.deleteReservation(id);
+    public void deleteReservation(@RequestBody DeleteReservationCommand command) {
+        reservationService.deleteReservation(command);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
