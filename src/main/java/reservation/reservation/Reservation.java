@@ -19,11 +19,13 @@ public class Reservation {
 
     @Id
     @GeneratedValue(generator = "Res_gen")
-    @TableGenerator(name = "Res_gen", table = "res_id_generator", pkColumnName = "res_name", pkColumnValue = "res_val", initialValue = 1, allocationSize = 100)
+    @TableGenerator(name = "Res_gen", table = "res_id_generator", pkColumnName = "res_name", pkColumnValue = "res_val", allocationSize = 100)
     @Column(name = "res_id")
     private Long resId;
-    @Column(name = "res_time")
-    private LocalDateTime time;
+    @Column(name = "res_start_time")
+    private LocalDateTime startTime;
+    @Column(name = "res_end_time")
+    private LocalDateTime endTime;
 
     @ManyToOne
     @JoinColumn(name = "court_id")
@@ -33,8 +35,9 @@ public class Reservation {
     @JoinColumn(name = "cust_id")
     private Customer customer;
 
-    public Reservation(LocalDateTime time, Court court, Customer customer) {
-        this.time = time;
+    public Reservation(LocalDateTime startTime, LocalDateTime endTime, Court court, Customer customer) {
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.court = court;
         this.customer = customer;
     }

@@ -29,12 +29,17 @@ public class Court {
     @Column(name = "court_close")
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime closeHour;
+    @Column(name = "court_type", length = 200)
+    @Enumerated(value = EnumType.STRING)
+    private CourtType courtType;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "court")
     private List<Reservation> reservations;
 
-    public Court(LocalTime openHour, LocalTime closeHour) {
+    public Court(String courtName, LocalTime openHour, LocalTime closeHour, CourtType courtType) {
+        this.courtName = courtName;
         this.openHour = openHour;
         this.closeHour = closeHour;
+        this.courtType = courtType;
     }
 }

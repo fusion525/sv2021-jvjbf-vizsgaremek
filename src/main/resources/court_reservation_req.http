@@ -2,8 +2,20 @@ POST http://localhost:8080/api/reservations
 Content-Type: application/json
 
 {
-"time": "2021-08-04T21:30",
-  "courtId": 2,
+"startTime": "2021-08-08T00:00",
+  "endTime": "2021-08-08T01:00",
+  "courtId": 1,
+  "customerId": 1
+}
+###
+
+POST http://localhost:8080/api/reservations
+Content-Type: application/json
+
+{
+  "startTime": "2021-08-08T22:00",
+  "endTime": "2021-08-08T23:00",
+  "courtId": 1,
   "customerId": 2
 }
 
@@ -13,17 +25,9 @@ Content-Type: application/json
 
 {
   "openHour": "08:00:00",
-  "closeHour": "23:00:00"
-}
-
-###
-
-POST http://localhost:8080/api/courts
-Content-Type: application/json
-
-{
-  "openHour": "10:00:00",
-  "closeHour": "23:59:00"
+  "closeHour": "23:00:00",
+  "courtName": "Squash court 1",
+  "courtType": "SQUASH"
 }
 
 ###
@@ -33,7 +37,18 @@ Content-Type: application/json
 {
 "name": "Gipsz Jakab",
   "email": "jakab.gipsz@outlook.com",
-  "phoneNumber": "06207555324"
+  "phoneNumber": "06203567321"
+}
+
+###
+
+POST http://localhost:8080/api/customers
+Content-Type: application/json
+
+{
+  "name": "Marsó Rebeka",
+  "email": "rebeka.o@outlook.com",
+  "phoneNumber": "06302115424"
 }
 
 ###

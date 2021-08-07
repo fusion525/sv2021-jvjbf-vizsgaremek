@@ -22,5 +22,6 @@ public class CreateCourtCommand {
     @NotBlank
     @Length(min = 3, max = 25)
     private String courtName;
+    private CourtType courtType;
 
 }

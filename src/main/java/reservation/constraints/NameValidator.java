@@ -11,7 +11,13 @@ public class NameValidator implements ConstraintValidator<NameConstraint,  Strin
 
     @Override
     public boolean isValid(String nameField, ConstraintValidatorContext cxt) {
-        char chr = nameField.charAt(0);
+
+        char chr = "A".charAt(0);
+
+        if (!nameField.isEmpty()) {
+            chr = nameField.charAt(0);
+        }
+
         return !nameField.isEmpty() && nameField != null && Character.isUpperCase(chr);
     }
 

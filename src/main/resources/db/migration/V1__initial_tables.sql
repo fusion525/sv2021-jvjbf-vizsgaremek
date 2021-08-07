@@ -3,6 +3,7 @@ CREATE TABLE `courts` (
     `court_name` VARCHAR(200),
     `court_open` TIME,
     `court_close` TIME,
+    `court_type` VARCHAR(200),
     PRIMARY KEY (`court_id`)
 );
 
@@ -16,6 +17,7 @@ CREATE TABLE `customers` (
 
 CREATE TABLE `reservations` (
     `res_id` BIGINT NOT NULL AUTO_INCREMENT,
-    `res_time` DATE,
+    `res_start_time` DATE,
+    `res_end_time` DATE,
     PRIMARY KEY (`res_id`)
 );

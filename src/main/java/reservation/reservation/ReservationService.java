@@ -9,7 +9,9 @@ import reservation.customer.Customer;
 import reservation.customer.CustomerService;
 
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -48,8 +50,8 @@ public class ReservationService {
     public List<ReservationDTO> getActualReservations() {
         Type targetListType = new TypeToken<List<ReservationDTO>>(){}.getType();
 
-        LocalDateTime start = LocalDateTime.now();
-        LocalDateTime end = LocalDateTime.now().plusDays(7);
+        LocalDateTime start = LocalDateTime.of(LocalDate.now().getYear(), LocalDateTime.now().getMonth(), LocalDateTime.now().getDayOfMonth(),0,0);
+        LocalDateTime end = start.plusDays(7);
 
         return modelMapper.map(reservationRepository.findActualReservations(start, end), targetListType);
     }
@@ -57,9 +59,18 @@ public class ReservationService {
     public ReservationDTO makeReservation(MakeReservationCommand command) {
         Court court = courtRepository.getById(command.getCourtId());
         Customer customer = customerService.getCustomerById(command.getCustomerId());
-        LocalDateTime time = command.getTime();
+        LocalDateTime startTime = command.getStartTime();
+        LocalDateTime endTime = command.getEndTime();
 
-        Reservation reservation = new Reservation(time,court,customer);
+        if (court.getReservations().stream().anyMatch(r -> r.getStartTime().equals(startTime) || r.getEndTime().equals(endTime))) {
+            throw new InvalidReservationException("Court is occupied at that time");
+        }
+
+        if (command.getStartTime().toLocalTime().isBefore(court.getOpenHour()) || command.getEndTime().toLocalTime().isAfter(court.getCloseHour())) {
+            throw new InvalidReservationException("Court is closed at that time");
+        }
+
+        Reservation reservation = new Reservation(startTime,endTime,court,customer);
         reservationRepository.save(reservation);
 
         return modelMapper.map(reservation, ReservationDTO.class);
@@ -72,7 +83,8 @@ public class ReservationService {
 
         reservation.setCourt(court);
         reservation.setCustomer(customer);
-        reservation.setTime(command.getTime());
+        reservation.setStartTime(command.getStartTime());
+        reservation.setEndTime(command.getEndTime());
 
         reservationRepository.save(reservation);
 

@@ -12,7 +12,7 @@ public class TimeValidator implements ConstraintValidator<TimeConstraint, LocalD
 
     @Override
     public boolean isValid(LocalDateTime timeField, ConstraintValidatorContext cxt) {
-        return timeField.isBefore(LocalDateTime.now());
+        return timeField.isAfter(LocalDateTime.now());
     }
 
 }

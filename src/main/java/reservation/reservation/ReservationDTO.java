@@ -14,28 +14,33 @@ import java.time.LocalDateTime;
 public class ReservationDTO {
 
     private long resId;
-    private LocalDateTime time;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private Customer customer;
     private Court court;
-
     private long courtId;
     private long custId;
 
-    public ReservationDTO(long resId, LocalDateTime time, Customer customer, Court court) {
+    public ReservationDTO(long resId, LocalDateTime startTime, LocalDateTime endTime, Customer customer, Court court) {
         this.resId = resId;
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.customer = customer;
         this.court = court;
-        this.courtId = court.getCourtId();
-        this.custId = customer.getCustId();
+        this.courtId = this.court.getCourtId();
+        this.custId = this.customer.getCustId();
     }
 
     public long getResId() {
         return resId;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
     public long getCourtId() {

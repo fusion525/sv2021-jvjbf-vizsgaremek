@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 public class MakeReservationCommand {
 
     @TimeConstraint
-    private LocalDateTime time;
+    private LocalDateTime startTime;
+    @TimeConstraint
+    private LocalDateTime endTime;
     private long courtId;
     private long customerId;
 

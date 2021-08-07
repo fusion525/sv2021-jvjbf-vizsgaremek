@@ -31,7 +31,7 @@ public class CourtService {
     }
 
     public CourtDTO createCourt(CreateCourtCommand command) {
-        Court court = new Court(command.getOpenHour(), command.getCloseHour());
+        Court court = new Court(command.getCourtName(),command.getOpenHour(),command.getCloseHour(),command.getCourtType());
         courtRepository.save(court);
 
         return modelMapper.map(court, CourtDTO.class);

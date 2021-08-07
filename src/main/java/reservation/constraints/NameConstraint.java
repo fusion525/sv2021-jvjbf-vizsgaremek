@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NameConstraint {
 
-    String message() default "Invalid name (Name should start with Capital letter)";
+    String message() default "Invalid name (Name can not be blank and should start with Capital letter)";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

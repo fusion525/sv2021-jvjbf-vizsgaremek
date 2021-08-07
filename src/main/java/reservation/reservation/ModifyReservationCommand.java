@@ -14,7 +14,9 @@ public class ModifyReservationCommand {
 
     private long reservationId;
     @TimeConstraint
-    private LocalDateTime time;
+    private LocalDateTime startTime;
+    @TimeConstraint
+    private LocalDateTime endTime;
     private long customerId;
     private long courtId;
 
