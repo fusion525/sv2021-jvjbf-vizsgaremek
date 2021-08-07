@@ -1,5 +1,8 @@
 package reservation.reservation;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reservations")
+@Tag(name = "Operations on reservations")
 public class ReservationController {
 
     private ReservationService reservationService;
@@ -24,11 +28,13 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
+    @Operation(description = "Lists reservation by id")
     public ReservationDTO getReservationById(@PathVariable("id") long id) {
         return reservationService.getReservationById(id);
     }
 
     @GetMapping("/court/{id}")
+    @Operation(description = "Lists Reservations ny court IDs")
     public List<ReservationDTO> getReservationsByCourtId(@PathVariable("id") long id) {
         return reservationService.getReservationByCourtId(id);
     }
@@ -39,22 +45,31 @@ public class ReservationController {
     //}
 
     @GetMapping
+    @Operation(description = "Lists reservations on actual week")
     public List<ReservationDTO> getActualReservations() {
         return reservationService.getActualReservations();
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(description = "Makes reservation")
+    @ApiResponse(responseCode = "201", description = "Reservation created successfully")
     public ReservationDTO makeReservation(@RequestBody @Valid MakeReservationCommand command) {
         return reservationService.makeReservation(command);
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @Operation(description = "Modifies reservation")
+    @ApiResponse(responseCode = "202", description = "Reservation modified")
     public ReservationDTO modifyReservation(@RequestBody @Valid ModifyReservationCommand command){
         return  reservationService.modifyReservation(command);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(description = "Deletes reservation by id")
+    @ApiResponse(responseCode = "204", description = "Reservation deleted")
     public void deleteReservation(@PathVariable long id) {
         reservationService.deleteReservation(id);
     }

@@ -1,53 +1,46 @@
 package reservation.reservation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import reservation.court.Court;
 import reservation.customer.Customer;
 
 import java.time.LocalDateTime;
 
-@Setter
+@Data
 @NoArgsConstructor
 @JsonIgnoreProperties("customer")
 public class ReservationDTO {
 
+    @Schema(name = "Reservation ID", example = "1")
     private long resId;
+    @Schema(name = "Reservation start time", example = "2021-08-15T22:00")
     private LocalDateTime startTime;
+    @Schema(name = "Reservation end time", example = "2021-08-15T23:00")
     private LocalDateTime endTime;
-    private Customer customer;
-    private Court court;
+    @Schema(name = "Court ID", example = "1")
     private long courtId;
+    @Schema(name = "Customer ID", example = "1")
     private long custId;
 
-    public ReservationDTO(long resId, LocalDateTime startTime, LocalDateTime endTime, Customer customer, Court court) {
+    public ReservationDTO(Customer customer, Court court, LocalDateTime startTime, LocalDateTime endTime, long resId) {
+        this.custId = customer.getCustId();
+        this.courtId = court.getCourtId();
         this.resId = resId;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.customer = customer;
-        this.court = court;
-        this.courtId = this.court.getCourtId();
-        this.custId = this.customer.getCustId();
+
     }
 
-    public long getResId() {
-        return resId;
+    public ReservationDTO(LocalDateTime startTime, LocalDateTime endTime, Court court, Customer customer) {
+        this.custId = customer.getCustId();
+        this.courtId = court.getCourtId();
+        this.startTime = startTime;
+        this.endTime = endTime;
+
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
 
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public long getCourtId() {
-        return courtId;
-    }
-
-    public long getCustId() {
-        return custId;
-    }
 }

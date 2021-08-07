@@ -1,5 +1,8 @@
 package reservation.customer;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
+@Tag(name = "Operations on customers")
 public class CustomerController {
 
     private CustomerService customerService;
@@ -24,22 +28,31 @@ public class CustomerController {
     }
 
     @GetMapping
+    @Operation(description = "Lists all customers")
     public List<CustomerDTO> listAllCustomers() {
         return customerService.listAllCustomers();
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(description = "Creates a customer")
+    @ApiResponse(responseCode = "201", description = "Customer created successfully")
     public CustomerDTO createCustomer(@RequestBody @Valid CreateCustomerCommand command) {
         return customerService.createCustomer(command);
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @Operation(description = "Modifies a customer")
+    @ApiResponse(responseCode = "202", description = "Customer modified successfully")
     public CustomerDTO modifyCustomer(@RequestBody @Valid ModifyCustomerCommand command) {
         return customerService.modifyCustomer(command);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(description = "Deletes customer by id")
+    @ApiResponse(responseCode = "204", description = "Customer deleted")
     public void deleteCustomer(@PathVariable("id") long id) {
         customerService.deleteCustomer(id);
     }

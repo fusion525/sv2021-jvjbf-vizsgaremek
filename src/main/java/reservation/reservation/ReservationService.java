@@ -63,11 +63,11 @@ public class ReservationService {
         LocalDateTime endTime = command.getEndTime();
 
         if (court.getReservations().stream().anyMatch(r -> r.getStartTime().equals(startTime) || r.getEndTime().equals(endTime))) {
-            throw new InvalidReservationException("Court is occupied at that time");
+            throw new InvalidReservationException("Court is occupied at this time");
         }
 
         if (command.getStartTime().toLocalTime().isBefore(court.getOpenHour()) || command.getEndTime().toLocalTime().isAfter(court.getCloseHour())) {
-            throw new InvalidReservationException("Court is closed at that time");
+            throw new InvalidReservationException("Court is closed at this time");
         }
 
         Reservation reservation = new Reservation(startTime,endTime,court,customer);

@@ -1,5 +1,8 @@
 package reservation.court;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/courts")
+@Tag(name = "Operations on courts")
 public class CourtController {
 
     private CourtService courtService;
@@ -24,6 +28,7 @@ public class CourtController {
     }
 
     @GetMapping
+    @Operation(summary = "Lists all courts")
     public List<CourtDTO> listAllCourts() {
         return courtService.listAllCourts();
     }
@@ -35,12 +40,16 @@ public class CourtController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Creates a new court")
+    @ApiResponse(responseCode = "201", description = "court has been created")
     public CourtDTO createCourt(@RequestBody @Valid CreateCourtCommand command) {
         return courtService.createCourt(command);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Deletes court by id")
+    @ApiResponse(responseCode = "204", description = "court deleted successfully")
     public void deleteCourtById(@PathVariable(name = "id") long id) {
         courtService.deleteCourtById(id);
     }

@@ -1,5 +1,6 @@
 package reservation.customer;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,12 +14,16 @@ import javax.validation.constraints.Email;
 @AllArgsConstructor
 public class ModifyCustomerCommand {
 
+    @Schema(name = "Customer id", example = "1")
     private long custId;
     @NameConstraint
+    @Schema(name = "Customer's name", example = "Jack Doe")
     private String name;
     @Email
+    @Schema(name = "Customer's email", example = "jack.doe@outlook.com")
     private String email;
     @PhoneNumberConstraint
+    @Schema(name = "Customer's phonenumber", example = "06208654123")
     private String phoneNumber;
 
 }

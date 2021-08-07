@@ -2,10 +2,10 @@ POST http://localhost:8080/api/reservations
 Content-Type: application/json
 
 {
-"startTime": "2021-08-08T00:00",
-  "endTime": "2021-08-08T01:00",
-  "courtId": 1,
-  "customerId": 1
+"startTime": "2021-08-07T18:00",
+  "endTime": "2021-08-07T19:00",
+  "courtId": 2,
+  "customerId": 2
 }
 ###
 
@@ -16,7 +16,7 @@ Content-Type: application/json
   "startTime": "2021-08-08T22:00",
   "endTime": "2021-08-08T23:00",
   "courtId": 1,
-  "customerId": 2
+  "customerId": 1
 }
 
 ###
@@ -27,6 +27,18 @@ Content-Type: application/json
   "openHour": "08:00:00",
   "closeHour": "23:00:00",
   "courtName": "Squash court 1",
+  "courtType": "SQUASH"
+}
+
+###
+
+POST http://localhost:8080/api/courts
+Content-Type: application/json
+
+{
+  "openHour": "08:00:00",
+  "closeHour": "23:00:00",
+  "courtName": "Squash court 2",
   "courtType": "SQUASH"
 }
 

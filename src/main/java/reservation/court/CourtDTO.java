@@ -1,6 +1,7 @@
 package reservation.court;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import reservation.reservation.Reservation;
@@ -15,11 +16,15 @@ import java.util.stream.Collectors;
 public class CourtDTO {
 
     private Long courtId;
+    @Schema(description = "Name of the court", example = "Squash court 1")
     private String courtName;
     @JsonFormat(pattern = "HH:mm:ss")
+    @Schema(description = "Opening hour of court", example = "08:00:00")
     private LocalTime openHour;
     @JsonFormat(pattern = "HH:mm:ss")
+    @Schema(description = "Closing hour of court", example = "23:00:00")
     private LocalTime closeHour;
+    @Schema(description = "Type of court", example = "SQUASH")
     private CourtType courtType;
     private List<Reservation> reservations;
 
