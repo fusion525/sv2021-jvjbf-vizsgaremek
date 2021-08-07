@@ -1,14 +1,12 @@
 package reservation.project.court_reservation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties("customer")
 public class ReservationDTO {
@@ -21,6 +19,15 @@ public class ReservationDTO {
     private long courtId;
     private long custId;
 
+    public ReservationDTO(long resId, LocalDateTime time, Customer customer, Court court) {
+        this.resId = resId;
+        this.time = time;
+        this.customer = customer;
+        this.court = court;
+        this.courtId = court.getCourtId();
+        this.custId = customer.getCustId();
+    }
+
     public long getResId() {
         return resId;
     }
@@ -30,10 +37,10 @@ public class ReservationDTO {
     }
 
     public long getCourtId() {
-        return court.getCourtId();
+        return courtId;
     }
 
     public long getCustId() {
-        return customer.getCustId();
+        return custId;
     }
 }

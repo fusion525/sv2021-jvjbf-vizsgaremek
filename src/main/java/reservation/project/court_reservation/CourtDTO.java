@@ -14,6 +14,7 @@ import java.util.List;
 public class CourtDTO {
 
     private Long courtId;
+    private String courtName;
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime openHour;
     @JsonFormat(pattern = "HH:mm:ss")

@@ -1,5 +1,5 @@
 package reservation.project.court_reservation;
 
 public enum CourtType {
-    SQUASH, TENNIS, BASKETBALL, FOOTBALL
+    SQUASH, TENNIS, BASKETBALL, FOOTBALL, VOLLEYBALL
 }

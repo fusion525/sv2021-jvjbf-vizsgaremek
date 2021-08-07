@@ -1,5 +1,6 @@
 CREATE TABLE `courts` (
     `court_id` BIGINT NOT NULL AUTO_INCREMENT,
+    `court_name` VARCHAR(200),
     `court_open` TIME,
     `court_close` TIME,
     PRIMARY KEY (`court_id`)

@@ -20,6 +20,8 @@ public class Court {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "court_id")
     private Long courtId;
+    @Column(name = "court_name", length = 200, nullable = false)
+    private String courtName;
     @Column(name = "court_open")
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime openHour;
