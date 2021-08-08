@@ -5,6 +5,7 @@ Időpontfoglaló alkalmazás sportpályákhoz.
 ENTITÁSOK:
 
 Court
+
     Név
     Nyitási idő
     Zárási idő
@@ -14,6 +15,7 @@ Court
     Az /api/courts végponton
     
 Customer
+
    Név
    Email
    Telefonszám
@@ -22,6 +24,7 @@ Customer
    Az /api/customers végponton
    
 Reservation
+
    Kezdési idő
    Befejezési idő
    Pálya azonosítója
