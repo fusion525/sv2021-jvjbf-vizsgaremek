@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import reservation.court.Court;
 import reservation.court.CourtRepository;
 import reservation.customer.Customer;
+import reservation.customer.CustomerRepository;
 import reservation.customer.CustomerService;
 
 import java.lang.reflect.Type;
@@ -19,13 +20,13 @@ public class ReservationService {
 
     private ModelMapper modelMapper;
     private ReservationRepository reservationRepository;
-    private CustomerService customerService;
+    private CustomerRepository customerRepository;
     private CourtRepository courtRepository;
 
-    public ReservationService(ModelMapper modelMapper, ReservationRepository reservationRepository, CustomerService customerService, CourtRepository courtRepository) {
+    public ReservationService(ModelMapper modelMapper, ReservationRepository reservationRepository, CustomerRepository customerRepository, CourtRepository courtRepository) {
         this.modelMapper = modelMapper;
         this.reservationRepository = reservationRepository;
-        this.customerService = customerService;
+        this.customerRepository = customerRepository;
         this.courtRepository = courtRepository;
     }
 
@@ -58,7 +59,7 @@ public class ReservationService {
 
     public ReservationDTO makeReservation(MakeReservationCommand command) {
         Court court = courtRepository.getById(command.getCourtId());
-        Customer customer = customerService.getCustomerById(command.getCustomerId());
+        Customer customer = customerRepository.getById(command.getCustomerId());
         LocalDateTime startTime = command.getStartTime();
         LocalDateTime endTime = command.getEndTime();
 
@@ -78,7 +79,7 @@ public class ReservationService {
 
     public ReservationDTO modifyReservation(ModifyReservationCommand command) {
         Reservation reservation = reservationRepository.getById(command.getReservationId());
-        Customer customer = customerService.getCustomerById(command.getCustomerId());
+        Customer customer =customerRepository.getById(command.getCustomerId());
         Court court = courtRepository.getById(command.getCourtId());
 
         reservation.setCourt(court);

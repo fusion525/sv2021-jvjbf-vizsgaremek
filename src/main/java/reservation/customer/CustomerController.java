@@ -33,6 +33,12 @@ public class CustomerController {
         return customerService.listAllCustomers();
     }
 
+    @GetMapping("/{id}")
+    @Operation(description = "Get customer by given id")
+    public CustomerDTO getCustomerById(@PathVariable(name = "id") long id) {
+        return customerService.getCustomerById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(description = "Creates a customer")
@@ -71,7 +77,7 @@ public class CustomerController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Problem> handleNotFound(MethodArgumentNotValidException manve) {
+    public ResponseEntity<Problem> handleNotValidParameters(MethodArgumentNotValidException manve) {
         Problem problem =
                 Problem.builder()
                         .withType(URI.create("customer/bad-request")).withTitle("Can not create customer with given parameters").withStatus(Status.BAD_REQUEST)

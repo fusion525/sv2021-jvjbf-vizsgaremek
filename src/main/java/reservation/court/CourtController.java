@@ -68,7 +68,7 @@ public class CourtController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Problem> handleNotFound(MethodArgumentNotValidException manve) {
+    public ResponseEntity<Problem> handleNotValidParameters(MethodArgumentNotValidException manve) {
         Problem problem =
                 Problem.builder()
                         .withType(URI.create("courts/bad-request")).withTitle("Can not create court with given parameters").withStatus(Status.BAD_REQUEST)

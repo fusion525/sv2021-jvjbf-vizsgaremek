@@ -26,4 +26,10 @@ public class ModifyReservationCommand {
     @Schema(name = "Court ID", example = "2")
     private long courtId;
 
+    public ModifyReservationCommand(LocalDateTime startTime, LocalDateTime endTime, long customerId, long courtId) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.customerId = customerId;
+        this.courtId = courtId;
+    }
 }

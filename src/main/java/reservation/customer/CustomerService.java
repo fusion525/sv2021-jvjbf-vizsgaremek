@@ -21,8 +21,9 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer getCustomerById(long id) {
-        return customerRepository.getById(id);
+    public CustomerDTO getCustomerById(long id) {
+
+        return modelMapper.map(customerRepository.getById(id),CustomerDTO.class);
     }
 
     public List<CustomerDTO> listAllCustomers() {

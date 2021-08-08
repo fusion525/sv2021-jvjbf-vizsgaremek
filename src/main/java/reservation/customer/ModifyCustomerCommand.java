@@ -26,4 +26,9 @@ public class ModifyCustomerCommand {
     @Schema(name = "Customer's phonenumber", example = "06208654123")
     private String phoneNumber;
 
+    public ModifyCustomerCommand(String name, String email, String phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
 }

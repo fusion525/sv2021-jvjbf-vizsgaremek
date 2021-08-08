@@ -88,7 +88,7 @@ public class ReservationController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Problem> handleNotFound(MethodArgumentNotValidException manve) {
+    public ResponseEntity<Problem> handleInvalidParameters(MethodArgumentNotValidException manve) {
         Problem problem =
                 Problem.builder()
                         .withType(URI.create("reservations/bad-request")).withTitle("Can not make reservation with given parameters").withStatus(Status.BAD_REQUEST)
