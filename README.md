@@ -10,7 +10,7 @@ Court
     Nyitási idő
     Zárási idő
     Pályatípusa (Enum: squash. tennis, basketball, volleyball)
-    
+   
     Az entitás listázható, mindegyik attribútum módosítható, és az egész entitás törölhető
     Az /api/courts végponton
     
